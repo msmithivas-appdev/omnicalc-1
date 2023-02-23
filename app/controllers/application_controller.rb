@@ -21,7 +21,10 @@ end
 
 def calculate_random
   
-  @num = params.fetch("calc_value").to_f
-   @rand_num =  
+  @lower = params.fetch("user_min").to_f
+  @upper = params.fetch("user_max").to_f
+  @result = rand(@lower..@upper)
   render({ :template => "random_results.html.erb"})
+end
+
 end
