@@ -40,20 +40,22 @@ def calculate_sqrt
 end
 
 def blank_payment
-  render({ :template => "sqrt_form.html.erb"})
+  render({ :template => "payment_form.html.erb"})
 
 end
 
 def calculate_payment
 
-  @apr = params.fetch("apr").to_f
-  @monthly_apr = @apr / 12
+  @apr = params.fetch("user_apr").to_f
+  @monthly_apr = @apr / 100.0
 
-  @term_month = params.fetch("term").to_f * 12
-  @principal = params.fetch("principal").to_f
-  @monthly_payment = (@monthly_apr * @principal) / (1 - ((1 + @term_month) ** -@term_month)) 
+  @term_month = params.fetch("user_years").to_f * 12
+  @principal = params.fetch("user_pv").to_f
+  @monthly_payment = (@monthly_apr/12 * @principal) / (1 - ((1 + (@monthly_apr/12)) ** -@term_month)) 
 
-  render({ :template => "sqrt_results.html.erb"})
+  # render({ :template => "payment_results.html.erb"})
+  render({ :template => "payment_results.html.erb"})
+  
 
 end
 
